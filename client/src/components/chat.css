@@ -1,0 +1,128 @@
+.chatHeader {
+  background-color: white;
+  border: thin 1px grey;
+  border-radius: 2.5px;
+  padding: 5px;
+  text-align: center;
+  color: rgb(16, 5, 44);
+  font-size: larger;
+  font-family: "Roboto", "Oxygen", "Ubuntu", Cantarell, "Open Sans",
+    "Helvetica Neue", sans-serif;
+}
+
+.messagesArea {
+  background-color: rgba(255, 255, 255, 0.877);
+  height: 700px;
+  min-width: 90%;
+  border: thin 1px grey;
+  border-radius: 2.5px;
+  padding: 16px;
+}
+
+@media screen and (max-height: 1024px) {
+  .messagesArea {
+    background-color: rgba(255, 255, 255, 0.877);
+    height: 700px;
+    min-height: 95%;
+    max-height: 100%;
+    min-width: 90%;
+    border: thin 1px grey;
+    border-radius: 2.5px;
+    padding: 16px;
+  }
+}
+
+@media screen and (max-height: 920px) {
+  .messagesArea {
+    background-color: rgba(255, 255, 255, 0.877);
+    height: 600px;
+    min-height: 95%;
+    max-height: 100%;
+    width: auto;
+    border: thin 1px grey;
+    border-radius: 2.5px;
+    padding: 16px;
+  }
+}
+@media screen and (max-height: 740px) {
+  .messagesArea {
+    background-color: rgba(255, 255, 255, 0.877);
+    height: 400px;
+    min-height: 95%;
+    max-height: 100%;
+    min-width: 90%;
+    border: thin 1px grey;
+    border-radius: 2.5px;
+    padding: 16px;
+  }
+}
+
+@media screen and (max-height: 600px) {
+  .messagesArea {
+    background-color: rgba(255, 255, 255, 0.877);
+    height: 300px;
+    min-height: 95%;
+    max-height: 100%;
+    min-width: 90%;
+    border: thin 1px grey;
+    border-radius: 2.5px;
+    padding: 16px;
+  }
+}
+.messageInput {
+  display: flex;
+  padding: 5px;
+  /* align-content: space-between; */
+  justify-content: space-between;
+  background-color: white;
+}
+
+.messagesContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.messageText {
+  padding: 12px 20px;
+  border-radius: 25px;
+  max-width: 600px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  position: relative;
+
+  text-align: center;
+  /* word-break: break-all; */
+}
+
+#sender {
+  background-color: darkblue;
+  color: white;
+  align-self: flex-end;
+}
+#receiver {
+  background-color: lightgray;
+  align-self: flex-start;
+}
+
+#senderTime {
+  align-self: flex-end;
+  font-size: 9px;
+  margin-right: 5%;
+}
+#receiverTime {
+  align-self: flex-start;
+  font-size: 9px;
+  margin-left: 5%;
+}
+#textInput {
+  width: 90%;
+  /* margin-left: 10%; */
+}
+#FiSend {
+  margin: 10px;
+}
+#FiSend:hover {
+  cursor: pointer;
+}
