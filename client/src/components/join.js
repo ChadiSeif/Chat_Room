@@ -3,6 +3,7 @@ import { TextInputField, Button } from "evergreen-ui";
 import "./join.css";
 
 const JoinInput = ({ socket, setJoined, setRoom, setName, name, room }) => {
+  //** Function to join a room */
   const joinRoom = (e) => {
     e.preventDefault();
     if (name && room) {

@@ -8,11 +8,12 @@ const Chat = ({ socket, name, room }) => {
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
 
-  // useEffect(() => {
-  //   socket.on("messageReceived", (msgReceived) => {
-  //     setMessageList((messageList) => [...messageList, msgReceived]);
-  //   });
-  // }, [socket]);
+  useEffect(() => {
+    socket.on("messageReceived", (msgReceived) => {
+      console.log(msgReceived);
+      setMessageList((messageList) => [...messageList, msgReceived]);
+    });
+  }, [socket]);
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -27,6 +28,7 @@ const Chat = ({ socket, name, room }) => {
       // sentAt: new Date(Date.now()).getUTCDate,
     };
     await socket.emit("messageSent", messageData);
+    setMessageList((messageList) => [...messageList, messageData]);
   };
 
   return (
@@ -41,7 +43,7 @@ const Chat = ({ socket, name, room }) => {
         <ScrollToBottom className="messagesArea">
           {messageList.map((msg) => {
             return (
-              <div className="messagesContainer">
+              <div key={Math.random()} className="messagesContainer">
                 <div
                   className="messageText"
                   key={Math.random()}

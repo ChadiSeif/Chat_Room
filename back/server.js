@@ -23,14 +23,16 @@ const io = new Server(server, {
 io.on("connection", async (socket) => {
   console.log("User is connected ", socket.id);
 
-  await socket.join("joinRoom");
-  // console.log(
-  //   `User with id = ${socket.id.substring(0, 4)} entered the room : ${data}`
-  // );
+  socket.on("joinRoom", (room) => {
+    socket.join(room);
+    console.log(
+      `User with id = ${socket.id.substring(0, 4)} entered the room : ${room}`
+    );
+  });
 
-  socket.on("messageSent", async (data) => {
+  socket.on("messageSent", (data) => {
+    socket.in(data.room).emit("messageReceived", data);
     // socket.broadcast.emit("messageReceived", data);
-    socket.emit("messageReceived", data);
   });
   socket.on("disconnect", () => {
     console.log("user disconnected", socket.id);
