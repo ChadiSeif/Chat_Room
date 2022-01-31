@@ -1,21 +1,25 @@
-// import { JOIN_ROOM, SEND_MESSAGE } from "./actionTypes";
+import { JOIN_ROOM, SEND_MESSAGE, RECEIVE_MESSAGE } from "./actionTypes";
 
-// export const joinRoom = (roomName) => {
-//   return {
-//     type: JOIN_ROOM,
-//     payload: roomName,
-//   };
-// };
+export const joinRoom = (User, socket) => {
+  socket.emit(User.room);
+  return {
+    type: JOIN_ROOM,
+    payload: User,
+  };
+};
+export const sendMessageAction = (messageData, socket) => {
+  socket.emit("messageSent", messageData);
+  return {
+    type: SEND_MESSAGE,
+    payload: messageData,
+  };
+};
 
-// export const sendMessage = (messageData) => {
-//   return {
-//     type: SEND_MESSAGE,
-//     payload: messageData,
-//   };
-// };
-
-// // export const receiveMessage = () => async (dispatch) => {
-// //   try {
-// //     await socket.on("messageReceived", msgReceived);
-// //   } catch (error) {}
-// // };
+export const receiveMessage = (socket) => async (dispatch) => {
+  await socket.on("messageReceived", (msgReceived) => {
+    return dispatch({
+      type: RECEIVE_MESSAGE,
+      payload: msgReceived,
+    });
+  });
+};

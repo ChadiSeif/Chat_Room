@@ -1,34 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { TextInput, Avatar } from "evergreen-ui";
+import { useSelector, useDispatch } from "react-redux";
 import { FiSend } from "react-icons/fi";
 import ScrollToBottom from "react-scroll-to-bottom";
 import "./chat.css";
+import { receiveMessage, sendMessageAction } from "../JS/actions";
 
-const Chat = ({ socket, name, room }) => {
+const Chat = ({ socket }) => {
   const [message, setMessage] = useState("");
-  const [messageList, setMessageList] = useState([]);
+
+  const userDetails = useSelector((state) => state.user);
+  const listMessages = useSelector((state) => state.messages);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    socket.on("messageReceived", (msgReceived) => {
-      console.log(msgReceived);
-      setMessageList((messageList) => [...messageList, msgReceived]);
-    });
+    dispatch(receiveMessage(socket));
   }, [socket]);
 
   const sendMessage = async (e) => {
     e.preventDefault();
     const messageData = {
       message: message,
-      name: name,
-      room: room,
+      name: userDetails.name,
+      room: userDetails.room,
       sent:
         new Date(Date.now()).getHours() +
         ":" +
         new Date(Date.now()).getMinutes(),
       // sentAt: new Date(Date.now()).getUTCDate,
     };
-    await socket.emit("messageSent", messageData);
-    setMessageList((messageList) => [...messageList, messageData]);
+    dispatch(sendMessageAction(messageData, socket));
   };
 
   return (
@@ -36,25 +37,29 @@ const Chat = ({ socket, name, room }) => {
       <div className="chat">
         <div className="chatHeader">
           <h5>
-            Room: {room} Username: {name}
+            Room: {userDetails.room} Username: {userDetails.name}
           </h5>
         </div>
 
         <ScrollToBottom className="messagesArea">
-          {messageList.map((msg) => {
+          {listMessages.map((msg) => {
             return (
               <div key={Math.random()} className="messagesContainer">
                 <div
                   className="messageText"
                   key={Math.random()}
-                  id={name === msg.name ? "sender" : "receiver"}
+                  id={userDetails.name === msg.name ? "sender" : "receiver"}
                 >
                   {msg.message}
                   <Avatar name={msg.name} size={20} marginLeft={16} />
                 </div>
                 <div
                   key={Math.random()}
-                  id={name === msg.name ? "senderTime" : "receiverTime"}
+                  id={
+                    userDetails.name === msg.name
+                      ? "senderTime"
+                      : "receiverTime"
+                  }
                 >
                   sent at {msg.sent}
                 </div>

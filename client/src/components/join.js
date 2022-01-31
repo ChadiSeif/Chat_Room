@@ -1,14 +1,27 @@
 import React from "react";
 import { TextInputField, Button } from "evergreen-ui";
+import { useDispatch } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 import "./join.css";
+import { joinRoom } from "../JS/actions";
 
-const JoinInput = ({ socket, setJoined, setRoom, setName, name, room }) => {
+const JoinInput = ({ socket }) => {
   //** Function to join a room */
-  const joinRoom = (e) => {
+
+  const dispatch = useDispatch();
+  const [room, setRoom] = React.useState("");
+  const [name, setName] = React.useState("");
+
+  const joiningRoom = (e) => {
     e.preventDefault();
+    const UserJoined = {
+      id: uuidv4(),
+      name: name,
+      room: room,
+    };
     if (name && room) {
-      setJoined(true);
-      socket.emit("joinRoom", room);
+      dispatch(joinRoom(UserJoined, socket));
+      // socket.emit("joinRoom", room);
     }
   };
 
@@ -24,14 +37,14 @@ const JoinInput = ({ socket, setJoined, setRoom, setName, name, room }) => {
         placeholder="Chat Room..."
         onChange={(e) => setRoom(e.target.value)}
         onKeyPress={(e) => {
-          e.key === "Enter" && joinRoom(e);
+          e.key === "Enter" && joiningRoom(e);
         }}
       />
 
       <Button
         marginRight={16}
         appearance="primary"
-        onClick={(e) => joinRoom(e)}
+        onClick={(e) => joiningRoom(e)}
       >
         Join
       </Button>

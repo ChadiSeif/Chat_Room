@@ -1,21 +1,26 @@
-// import { io } from "socket.io-client";
-// import { JOIN_ROOM, SEND_MESSAGE } from "./actionTypes";
-// const socket = io("http://127.0.0.1:3001");
+import { JOIN_ROOM, SEND_MESSAGE, RECEIVE_MESSAGE } from "./actionTypes";
 
-// const initialState = {
-//   messages: {},
-//   error: {},
-// };
+let initialState = {
+  messages: [],
+  joined: false,
+  user: {},
+  error: {},
+};
 
-// const rootReducer = (state = initialState, { type, payload }) => {
-//   switch (type) {
-//     case JOIN_ROOM:
-//       return socket.emit(payload);
-//     case SEND_MESSAGE:
-//       return socket.emit(payload);
-//     default:
-//       return state;
-//   }
-// };
+const rootReducer = (state = initialState, { type, payload }) => {
+  switch (type) {
+    case JOIN_ROOM:
+      return { ...state, joined: true, user: payload };
+    case SEND_MESSAGE:
+      return {
+        ...state,
+        messages: [...state.messages, payload],
+      };
+    case RECEIVE_MESSAGE:
+      return { ...state, messages: [...state.messages, payload] };
+    default:
+      return state;
+  }
+};
 
-// export default rootReducer;
+export default rootReducer;

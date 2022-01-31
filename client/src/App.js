@@ -1,33 +1,24 @@
-import React, { useState } from "react";
-import "./App.css";
+import React from "react";
 import { io } from "socket.io-client";
+import { useSelector } from "react-redux";
 import Chat from "./components/chat";
 import JoinInput from "./components/join";
+import "./App.css";
 
 const socket = io("http://127.0.0.1:3001");
 
 function App() {
-  const [joined, setJoined] = useState(false);
-  const [room, setRoom] = useState("");
-  const [name, setName] = useState("");
-
+  const joined = useSelector((state) => state.joined);
   return (
     <div className="mainBody">
       {!joined ? (
         <div>
           <h3>My First Chat App</h3>
-          <JoinInput
-            socket={socket}
-            setJoined={setJoined}
-            setRoom={setRoom}
-            room={room}
-            setName={setName}
-            name={name}
-          />
+          <JoinInput socket={socket} />
         </div>
       ) : (
-        <div>
-          <Chat name={name} room={room} socket={socket} />
+        <div data-testid="chat">
+          <Chat socket={socket} />
         </div>
       )}
     </div>

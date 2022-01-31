@@ -31,8 +31,9 @@ io.on("connection", async (socket) => {
   });
 
   socket.on("messageSent", (data) => {
-    socket.in(data.room).emit("messageReceived", data);
-    // socket.broadcast.emit("messageReceived", data);
+    console.log(data);
+    // socket.emit("messageReceived", data);
+    socket.broadcast.emit("messageReceived", data);
   });
   socket.on("disconnect", () => {
     console.log("user disconnected", socket.id);
