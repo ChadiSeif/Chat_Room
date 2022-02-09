@@ -1,30 +1,41 @@
-// import { render, screen, fireEvent } from "@testing-library/react";
-// import { Provider } from "react-redux";
-// import { createStore } from "redux";
-// import rootReducer from "./JS/reducers";
-// import "@testing-library/jest-dom";
-// import App from "./App";
+import React from "react";
+import { screen, render, fireEvent } from "@testing-library/react";
+import { Provider } from "react-redux";
+import store from "./JS/store";
+import Proptypes from "prop-types";
+import { assertPropTypes } from "check-prop-types";
+import JoinInput from "./components/join";
 
-// let initialState = {
-//   messages: [],
-//   joined: false,
-//   user: {},
-//   error: {},
-// };
+const renderAlt = (component) => {
+  return render(
+    <Provider store={store}>
+      {component}
+      );
+    </Provider>
+  );
+};
 
-// const renderWithRedux = (
-//   component,
-//   { initialState, store = createStore(rootReducer, initialState) } = {} /// ={} means default value
-// ) => {
-//   return {
-//     ...render(<Provider>{component}</Provider>),
-//   };
-// };
+describe("Join input tests", () => {
+  it("textinput validation", () => {
+    renderAlt(<JoinInput />);
+    const nameInput = screen.getByTestId("nameInput");
+    expect(nameInput).toBeTruthy();
+  });
 
-// describe("App", () => {
-//   it("chat div appears", () => {
-//     renderWithRedux(<App />);
-//     const chat = screen.getByTestId("chat");
-//     expect(chat).toBe(1);
-//   });
-// });
+  it("event onChange", () => {
+    renderAlt(<JoinInput />);
+    const nameInput = screen.getByTestId("nameInput");
+    fireEvent.change(nameInput, { target: { value: "hello" } });
+    expect(nameInput.value).toBe("hello");
+  });
+
+  it("checking proptypes", () => {
+    const socket = {
+      _callbacks: { $messageReceived: Array(4) },
+      acks: {},
+      connected: true,
+    };
+    // renderAlt(<JoinInput />);
+    assertPropTypes(JoinInput.propTypes, socket, "props", JoinInput.socket);
+  });
+});

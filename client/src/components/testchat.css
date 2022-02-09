@@ -1,0 +1,101 @@
+.chatContainer {
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+}
+
+.connectedField {
+  background-color: #fff;
+  border-radius: 10px 0 0 10px;
+  border: solid 1px #37d5d6;
+  position: relative;
+  overflow: hidden;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  min-height: 480px;
+  padding: 10px;
+}
+
+.messagesField {
+  background-color: rgb(241, 240, 240);
+  border: solid 1px #36096d60;
+  border-radius: 0 10px 10px 0;
+  position: relative;
+  min-height: 480px;
+  width: 70%;
+}
+.form-inline {
+  width: 50vw;
+  border-radius: 10px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.userInformation {
+  margin: 10px;
+}
+
+.listConnectedUsers {
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-top: solid 1px #36096d;
+  margin-top: 10px;
+}
+
+.userInformations {
+  background-color: #ffff;
+  border-bottom: solid 1px #36096d50;
+  padding: 10px;
+  height: 8vh;
+  font-size: 14px;
+}
+
+.messagesContainer {
+  min-height: 50vh;
+  max-height: 50vh;
+}
+.messagesInput {
+  width: 100%;
+
+  border-top: solid 1px #36096d50;
+}
+
+.messageText {
+  padding: 12px 20px;
+  border-radius: 25px;
+  max-width: 600px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  position: relative;
+  font-size: small;
+  margin: 10px;
+  text-align: center;
+  display: flex;
+  /* word-break: break-all; */
+}
+
+#sender {
+  background-color: darkblue;
+  color: white;
+  align-self: flex-end;
+}
+#receiver {
+  background-color: lightgray;
+  align-self: flex-start;
+}
+#senderTime {
+  align-self: flex-end;
+  font-size: 9px;
+  margin-right: 5%;
+}
+#receiverTime {
+  align-self: flex-start;
+  font-size: 9px;
+  margin-left: 5%;
+}

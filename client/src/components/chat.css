@@ -83,39 +83,6 @@
   align-items: flex-start;
 }
 
-.messageText {
-  padding: 12px 20px;
-  border-radius: 25px;
-  max-width: 600px;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  position: relative;
-
-  text-align: center;
-  /* word-break: break-all; */
-}
-
-#sender {
-  background-color: darkblue;
-  color: white;
-  align-self: flex-end;
-}
-#receiver {
-  background-color: lightgray;
-  align-self: flex-start;
-}
-
-#senderTime {
-  align-self: flex-end;
-  font-size: 9px;
-  margin-right: 5%;
-}
-#receiverTime {
-  align-self: flex-start;
-  font-size: 9px;
-  margin-left: 5%;
-}
 #textInput {
   width: 90%;
   /* margin-left: 10%; */

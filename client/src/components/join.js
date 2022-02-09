@@ -2,8 +2,9 @@ import React from "react";
 import { TextInputField, Button } from "evergreen-ui";
 import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
+import { joinRoom } from "../JS/actions/chatActions";
+import PropTypes from "prop-types";
 import "./join.css";
-import { joinRoom } from "../JS/actions";
 
 const JoinInput = ({ socket }) => {
   //** Function to join a room */
@@ -28,12 +29,16 @@ const JoinInput = ({ socket }) => {
   return (
     <div className="inputField">
       <TextInputField
+        label="Name"
+        data-testid="nameInput"
+        value={name}
         name="text-input-name"
         placeholder="Your Name..."
         onChange={(e) => setName(e.target.value)}
       />
       <TextInputField
-        name="text-input-name"
+        label="Room"
+        name="text-input-room"
         placeholder="Chat Room..."
         onChange={(e) => setRoom(e.target.value)}
         onKeyPress={(e) => {
@@ -52,4 +57,7 @@ const JoinInput = ({ socket }) => {
   );
 };
 
+JoinInput.propTypes = {
+  socket: PropTypes.object,
+};
 export default JoinInput;
