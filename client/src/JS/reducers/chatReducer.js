@@ -7,6 +7,7 @@ import {
   GET_LIST_MESSAGES_FAIL,
   GET_USERS_CONNECTED_SUCCESS,
   GET_USERS_CONNECTED_FAIL,
+  // ADD_USER_TO_CONNECTEDLIST,
 } from "../actionTypes";
 
 let initialState = {
@@ -34,6 +35,8 @@ const chatReducer = (state = initialState, { type, payload }) => {
       };
     case RECEIVE_MESSAGE:
       return { ...state, messages: [...state.messages, payload] };
+    // case ADD_USER_TO_CONNECTEDLIST:
+    //   return { ...state, users_connected: payload };
     case GET_LIST_MESSAGES_SUCCESS:
       return { ...state, messages: payload };
     case GET_LIST_MESSAGES_FAIL:

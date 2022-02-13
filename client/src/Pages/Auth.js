@@ -22,7 +22,6 @@ const Auth = ({ socket }) => {
     password: "",
   });
 
-  // console.log("user login is", userLoginInformations);
   const [userRegisterInformations, setUserRegisterInformations] = useState({
     username: "",
     email: "",
@@ -174,19 +173,6 @@ const Auth = ({ socket }) => {
             </div>
           </div>
         </div>
-        <footer>
-          <p>
-            Created with <i className="fa fa-heart" /> by Seif Chedi - Design by
-            Florin Pop Read how he made this template
-            <a
-              target="_blank"
-              rel="noreferrer"
-              href="https://www.florin-pop.com/blog/2019/03/double-slider-sign-in-up-form/"
-            >
-              here
-            </a>
-          </p>
-        </footer>
       </div>
     </div>
   );

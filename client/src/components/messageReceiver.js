@@ -6,10 +6,10 @@ const MessageReceiver = ({ msg }) => {
       <div className="messageText" key={Math.random()} id="receiver">
         <Avatar
           sx={{
-            width: 15,
-            height: 15,
-            fontSize: "10px",
-            marginRight: "10px",
+            width: "1.5vw",
+            height: 22,
+            fontSize: "0.7rem",
+            marginRight: "0.5vw",
           }}
         >
           {msg.username.substr(0, 2)}

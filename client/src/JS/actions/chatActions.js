@@ -16,16 +16,10 @@ export const joinRoom = (data, socket) => {
   socket.emit("joinRoom", { username, room });
   return {
     type: JOIN_ROOM,
-    payload: { username },
+    payload: { username, userChatId: socket.id },
   };
 };
-export const sendMessageAction = (messageData, socket) => async (dispatch) => {
-  const messageToEmit = {
-    message: messageData.message,
-    username: messageData.username,
-    sent_at: messageData.sent_at,
-  };
-  socket.emit("messageSent", messageToEmit);
+export const saveMsgInDB = (messageData) => async (dispatch) => {
   try {
     const messageSavedInDb = {
       message: messageData.message,
@@ -36,21 +30,23 @@ export const sendMessageAction = (messageData, socket) => async (dispatch) => {
     await axios.post("/api/messages/addMessage", messageSavedInDb);
     return dispatch({
       type: SEND_MESSAGE_SUCCESS,
-      payload: messageToEmit,
+      payload: messageData,
     });
   } catch (error) {
     return dispatch({ type: SEND_MESSAGE_FAIL, payload: error.response.data });
   }
 };
 
-export const receiveMessage = (socket) => async (dispatch) => {
-  await socket.on("messageReceived", (msgReceived) => {
-    return dispatch({
-      type: RECEIVE_MESSAGE,
-      payload: msgReceived,
-    });
-  });
+export const addMessageToStore = (msgReceived) => {
+  return {
+    type: RECEIVE_MESSAGE,
+    payload: msgReceived,
+  };
 };
+
+// export const addUserToConnectedList = (user) => {
+//   return { type: ADD_USER_TO_CONNECTEDLIST, payload: user };
+// };
 
 export const messagesLog = () => async (dispatch) => {
   try {
@@ -64,6 +60,7 @@ export const messagesLog = () => async (dispatch) => {
 export const getusersConnected = () => async (dispatch) => {
   try {
     const result = await axios.get("/api/messages/getConnectedUsers");
+    console.log("ahaya connected list", result.data);
     return dispatch({
       type: GET_USERS_CONNECTED_SUCCESS,
       payload: result.data,
@@ -71,11 +68,4 @@ export const getusersConnected = () => async (dispatch) => {
   } catch (error) {
     dispatch({ type: GET_USERS_CONNECTED_FAIL, payload: error.response.data });
   }
-};
-
-export const usersConnected = (socket) => async (dispatch) => {
-  await socket.on("roomUsers", (data) => {
-    console.log("hedhom houma", data);
-    return dispatch({ type: GET_USERS_CONNECTED_SUCCESS, payload: data });
-  });
 };

@@ -1,4 +1,5 @@
 import { Avatar } from "@mui/material/";
+
 const MessageSender = ({ msg }) => {
   return (
     <>
@@ -6,10 +7,10 @@ const MessageSender = ({ msg }) => {
         {msg.message}
         <Avatar
           sx={{
-            width: 15,
-            height: 15,
-            fontSize: "10px",
-            marginLeft: "10px",
+            width: "1.5vw",
+            height: 22,
+            fontSize: "0.7rem",
+            marginLeft: "0.5vw",
           }}
         >
           {msg.username.substr(0, 2)}

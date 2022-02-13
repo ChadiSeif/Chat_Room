@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import store from "./JS/store";
+// import "bootstrap/dist/css/bootstrap.min.css";
 // import "@coreui/coreui/dist/css/coreui.min.css";
 
 ReactDOM.render(
