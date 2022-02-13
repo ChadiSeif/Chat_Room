@@ -18,7 +18,7 @@ import MessageReceiver from "./messageReceiver";
 import Peer from "simple-peer";
 import { VscCallIncoming, VscCallOutgoing } from "react-icons/vsc";
 import { HiOutlinePhoneMissedCall } from "react-icons/hi";
-// import useSentimentAnalysis from "./sentimentAnalysis";
+import useSentimentAnalysis from "./sentimentAnalysis";
 
 const Testchat = ({ socket }) => {
   //**React Redux configs ( dispatch and data from store) */
@@ -33,7 +33,7 @@ const Testchat = ({ socket }) => {
 
   const [message, setMessage] = useState("");
   const [toggleVideo, settoggleVideo] = useState(false);
-  // let sentiment = useSentimentAnalysis(message);
+  let sentiment = useSentimentAnalysis(message);
 
   const [msgReceivedTest, setmsgReceived] = useState();
   console.log("msg received is", msgReceivedTest);
@@ -118,7 +118,7 @@ const Testchat = ({ socket }) => {
   const userVideo = useRef();
   const connectionRef = useRef();
 
-  console.log("callacceptedis ", callAccepted);
+  // console.log("callacceptedis ", callAccepted);
 
   socket.on("callUser", (data) => {
     console.log(data);
@@ -309,13 +309,13 @@ const Testchat = ({ socket }) => {
                   }
                 }}
               />
-              {/* {sentiment === "positive" ? (
+              {sentiment === "positive" ? (
                 <span>&#128512;</span>
               ) : sentiment === "neutral" ? (
                 <span>&#128528;</span>
               ) : sentiment === "negative" ? (
                 <span>&#128545;</span>
-              ) : null} */}
+              ) : null}
               <button
                 className="btn btn-primary ml-1"
                 style={{
